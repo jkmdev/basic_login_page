@@ -1,7 +1,5 @@
 <?php
 
-//cookies and sessions
-
 	session_start();
 
 	if (isset($_SESSION['User'])) {
