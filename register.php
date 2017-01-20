@@ -1,17 +1,15 @@
 	
 <?php
 
-	//session_start();
-
 	if (isset($_POST['exit'])) {
 		header("Location: login.php");
 	}
 
 	class DB {
-	    private $server = "localhost";
-	    private $database = "int_db";
-	    private $username = "root";
-	    private $password = "firesbr0";
+	    private $server = "host";
+	    private $database = "database";
+	    private $username = "username";
+	    private $password = "password";
 	    private $conn;
 	  function __construct () {
 	    $this->conn = mysqli_connect($this->server, $this->username, $this->password, $this->database) or die ("Connection failed:" . mysqli_error($conn));
