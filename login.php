@@ -1,10 +1,5 @@
 <?php
 
-	//validation
-	//maps of meaning
-	//chimps go to war
-	//session_name("sessionA");
-
 session_start();
 
 if (isset($_COOKIE['COUNT'])) {
@@ -15,19 +10,11 @@ else {
 	setcookie("COUNT", 1);
 }
 
-/*if (isset($_SESSION['User'])) {
-	header("Location: fi.php");
-}*/
-
 $user = $_POST['userName'];
 $pass = $_POST['passWord'];
 $errorName = " No Errors";
 $errorPass = " No Errors";
 $error = false;
-
-//remember to study capture groups (regex)
-//test yourself on regex online (if possible)
-
 
 	if (!preg_match('/^[a-zA-Z0-9\*&\$-_]{1,10}$/', $user)) {
 		$errorName = " Invalid Username";
@@ -79,15 +66,11 @@ $error = false;
   if (!$error) {
 
 	$_SESSION['User'] = $user;
-	
-	//setcookie(session_name(), session_id(), time()+1800);
+
 	setcookie("User", $user, time()+1800);
 
-	//database
+	$conn = mysqli_connect("host","username","password","database") or die ('Connection failed: ' . mysqli_error($conn));
 
-	$conn = mysqli_connect("localhost","root","firesbr0","int_db") or die ('Connection failed: ' . mysqli_error($conn));
-
-	//$query = "SELECT * FROM users WHERE username LIKE $user"; 
 	$query = "SELECT * FROM users WHERE username LIKE '" . $_POST['userName'] .  "' AND password LIKE '" . crypt($_POST['passWord'], 'poppy') . "'";
 
 	$execute = mysqli_query($conn, $query) or die ('Query failed: ' . mysqli_error($conn));
